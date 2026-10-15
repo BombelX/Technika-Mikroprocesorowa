@@ -44,15 +44,30 @@ base_program = [\
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
 
 load_store_program = [
-  0x80,  # 00: mov r0, #0
-  0x90,  # 01: mov r1, #0
-  0xEE,  # 02: str r0, [14]  - M[14] = 0
-  0x86,  # 03: mov r0, #6
-  0xDD,  # 04: ldr r1, [13]  - r1 = M[13]
-  0x20,  # 05: add r0, r1    - r0 = r0 + r1
-  0xEE,  # 06: str r0, [14]  - M[14] = r0
-  0x00,  # 07: jmp #0
+  0x80,  
+  0x90,  
+  0xEE,  
+  0x86,  
+  0xDD,  
+  0x20,  
+  0xEE,  
+  0x00,  
   0x00, 0x00, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00]
+
+
+    # mov R0, #0
+    # mov R1, #0
+    # mov R0, #0
+    # str R0, 14
+    # mov R0, #6
+    # ldr R1, 13
+    # add R0, R1
+    # str R0, 14
+    # jmp 0
+
+    # 10 A # 11 B # 12 C # 13 D # 14 E # 15 F
+
+
 
 # load_store_program with an instruction the cpu does not know
 undefined_program = [

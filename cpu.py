@@ -43,7 +43,11 @@ class Cpu:
         self.r0 = product & 0x0F
         self.r1 = (product >> 4) & 0x0F
 
-      # load and store (opcode bit 7 is 1)
+      # Subtruction
+      elif self.__opcode_h == 0x4:
+        self.r0 = self.r0 - self.r1
+
+
       elif self.__opcode_h == 0x8:
         self.r0 = self.__opcode_l
       elif self.__opcode_h == 0x9:

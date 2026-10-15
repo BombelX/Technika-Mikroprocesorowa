@@ -1,7 +1,8 @@
 
 class Cpu:
-  def __init__(self, mem):
+  def __init__(self, mem, undefined_cb=None):
     self.mem = mem
+    self.undefined_cb = undefined_cb
     self.reset()
     self.__opcode_h = 0
     self.__opcode_l = 0
@@ -36,14 +37,12 @@ class Cpu:
         self.pc = self.__opcode_l
       elif self.__opcode_h == 0x2:
         self.r0 = self.r0 + self.r1
-
-      # multiplication
+      # multiplication: r1:r0 = r0 * r1 (r1 - upper 4 bits, r0 - lower 4 bits)
       elif self.__opcode_h == 0x3:
-              self.r0 = self.r0 * self.r1
-      # substraction
-      elif self.__opcode_h == 0x4:
-              self.r0 = self.r0 - self.r1
-      
+        product = self.r0 * self.r1
+        self.r0 = product & 0x0F
+        self.r1 = (product >> 4) & 0x0F
+
       # load and store (opcode bit 7 is 1)
       elif self.__opcode_h == 0x8:
         self.r0 = self.__opcode_l
@@ -65,7 +64,12 @@ class Cpu:
       elif self.__opcode_h == 0xF:
         self.mem_address = self.__opcode_l
         self.mem_data_w = self.r1
-        
+
+      # undefined instruction - mem_address still holds its address from state 0
+      else:
+        if self.undefined_cb is not None:
+          self.undefined_cb(self.mem_address)
+
     elif self.state == 3:
       self.state = 0
       if self.__opcode_h == 0xC:

@@ -43,54 +43,54 @@ base_program = [\
   0x00, \
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
 
-load_store_program = [\
-  0x80, \
-  0x90, \
-  0x80, \
-  0xEE, \
-  0x86, \
-  0xDD, \
-  0x20, \
-  0xEE, \
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x05, 0x11, 0x00]
+load_store_program = [
+  0x80,  # 00: mov r0, #0
+  0x90,  # 01: mov r1, #0
+  0xEE,  # 02: str r0, [14]  - M[14] = 0
+  0x86,  # 03: mov r0, #6
+  0xDD,  # 04: ldr r1, [13]  - r1 = M[13]
+  0x20,  # 05: add r0, r1    - r0 = r0 + r1
+  0xEE,  # 06: str r0, [14]  - M[14] = r0
+  0x00,  # 07: jmp #0
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00]
 
+# load_store_program with an instruction the cpu does not know
+undefined_program = [
+  0x80,  # 00: mov r0, #0
+  0x90,  # 01: mov r1, #0
+  0xEE,  # 02: str r0, [14]
+  0x86,  # 03: mov r0, #6
+  0x50,  # 04: undefined (0x30 is mul now)
+  0xDD,  # 05: ldr r1, [13]
+  0x20,  # 06: add r0, r1
+  0xEE,  # 07: str r0, [14]
+  0x00,  # 08: jmp #0
+  0x00, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00]
 
-multiplication_program = [\
-  0x83, \
-  0x94, \
-  0x30, \
-  0x00, \
-  0x00, \
-  0x00, \
-  0x00, \
-  0x00, \
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+# 0x30 demo: r1:r0 = r0 * r1, 6 * 7 = 42 = 0x2A
+mul_program = [
+  0xCC,  # 00: ldr r0, [12]
+  0xDD,  # 01: ldr r1, [13]
+  0x30,  # 02: mul r0, r1    - r1 = 0x2, r0 = 0xA
+  0xEE,  # 03: str r0, [14]  - lower part
+  0xFF,  # 04: str r1, [15]  - upper part
+  0x00,  # 05: jmp #0
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x07, 0x00, 0x00]
 
-error_program = [\
-  0x83, \
-  0x94, \
-  0x70, \
-  0x00, \
-  0x00, \
-  0x00, \
-  0x00, \
-  0x00, \
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+programs = {
+    'base': base_program,
+    'load_store': load_store_program,
+    'undefined': undefined_program,
+    'mul': mul_program,
+}
 
-# mov R0, #0
-# mov R1, #0
-# mov R0, #0
-# str R0, 14
-# mov R0, #6
-# ldr R1, 13
-# add R0, R1
-# str R0, 14
-# jmp 0
-
-# 10 A # 11 B # 12 C # 13 D # 14 E # 15 F
+def undefined(address):
+    print(f'Undefined instruction at address 0x{address:02X}')
 
 if __name__ == "__main__":
-    cpu = Cpu(error_program)
+    # python3 scs.py [base|load_store|undefined|mul]
+    name = sys.argv[1] if len(sys.argv) > 1 else 'load_store'
+    cpu = Cpu(programs[name], undefined)
 
     print("Press any key ('q' to quit, space for clock, d for debug dump)...")
 

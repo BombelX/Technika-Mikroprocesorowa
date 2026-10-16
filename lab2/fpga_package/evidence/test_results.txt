@@ -1,0 +1,15 @@
+PASS tb_cpu: 65536 opcode/register cases x 2 ISA profiles, 1572931 master cycles; PC rollover, pauses, reset
+sim/tb_cpu.v:186: $finish called at 15794848000 (1ps)
+PASS tb_toplevel: 3.5 program, 4/1-step controls, debounce, manual/automatic UART decoded, reset RAM retention, automatic timer
+sim/tb_toplevel.v:118: $finish called at 13069860000 (1ps)
+base ISA_LAB2=0 PASS reference cycles=72
+load_store ISA_LAB2=0 PASS reference cycles=96
+undefined ISA_LAB2=0 PASS reference cycles=108
+mul ISA_LAB2=0 PASS reference cycles=72
+sub ISA_LAB2=0 PASS reference cycles=60
+overflow ISA_LAB2=0 PASS reference cycles=60
+sub_underflow ISA_LAB2=0 PASS reference cycles=60
+lab2_add_r1 ISA_LAB2=1 PASS reference cycles=96
+lab2_mul ISA_LAB2=1 PASS reference cycles=72
+PASS: 9 programs, 3 loops each, 696 microcycles; registers, state, PC, address, write data and all RAM bytes match.
+R bus intentionally excluded: Python latches a read, BRAM continuously reads the selected address.

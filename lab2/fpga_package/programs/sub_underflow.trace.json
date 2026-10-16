@@ -1,0 +1,22 @@
+[
+{"cycle": 1, "instruction": 1, "state": 1, "r0": 0, "r1": 0, "pc": 0, "address": 0, "write": 0, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+{"cycle": 2, "instruction": 1, "state": 2, "r0": 0, "r1": 0, "pc": 1, "address": 0, "write": 0, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+{"cycle": 3, "instruction": 1, "state": 3, "r0": 3, "r1": 0, "pc": 1, "address": 0, "write": 0, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+{"cycle": 4, "instruction": 1, "state": 0, "r0": 3, "r1": 0, "pc": 1, "address": 0, "write": 0, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+{"cycle": 5, "instruction": 2, "state": 1, "r0": 3, "r1": 0, "pc": 1, "address": 1, "write": 0, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+{"cycle": 6, "instruction": 2, "state": 2, "r0": 3, "r1": 0, "pc": 2, "address": 1, "write": 0, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+{"cycle": 7, "instruction": 2, "state": 3, "r0": 3, "r1": 5, "pc": 2, "address": 1, "write": 0, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+{"cycle": 8, "instruction": 2, "state": 0, "r0": 3, "r1": 5, "pc": 2, "address": 1, "write": 0, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+{"cycle": 9, "instruction": 3, "state": 1, "r0": 3, "r1": 5, "pc": 2, "address": 2, "write": 0, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+{"cycle": 10, "instruction": 3, "state": 2, "r0": 3, "r1": 5, "pc": 3, "address": 2, "write": 0, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+{"cycle": 11, "instruction": 3, "state": 3, "r0": 14, "r1": 5, "pc": 3, "address": 2, "write": 0, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+{"cycle": 12, "instruction": 3, "state": 0, "r0": 14, "r1": 5, "pc": 3, "address": 2, "write": 0, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+{"cycle": 13, "instruction": 4, "state": 1, "r0": 14, "r1": 5, "pc": 3, "address": 3, "write": 0, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+{"cycle": 14, "instruction": 4, "state": 2, "r0": 14, "r1": 5, "pc": 4, "address": 3, "write": 0, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+{"cycle": 15, "instruction": 4, "state": 3, "r0": 14, "r1": 5, "pc": 4, "address": 14, "write": 14, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+{"cycle": 16, "instruction": 4, "state": 0, "r0": 14, "r1": 5, "pc": 4, "address": 14, "write": 14, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0]},
+{"cycle": 17, "instruction": 5, "state": 1, "r0": 14, "r1": 5, "pc": 4, "address": 4, "write": 14, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0]},
+{"cycle": 18, "instruction": 5, "state": 2, "r0": 14, "r1": 5, "pc": 5, "address": 4, "write": 14, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0]},
+{"cycle": 19, "instruction": 5, "state": 3, "r0": 14, "r1": 5, "pc": 0, "address": 4, "write": 14, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0]},
+{"cycle": 20, "instruction": 5, "state": 0, "r0": 14, "r1": 5, "pc": 0, "address": 4, "write": 14, "memory": [131, 149, 64, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0]}
+]

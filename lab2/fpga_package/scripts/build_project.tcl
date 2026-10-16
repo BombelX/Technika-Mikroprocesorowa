@@ -1,0 +1,4 @@
+# One command, new project + bitstream. GUI creation remains available separately.
+set script_dir [file dirname [file normalize [info script]]]
+source [file join $script_dir create_project.tcl]
+source [file join $script_dir build_bitstream.tcl]

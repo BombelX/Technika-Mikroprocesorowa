@@ -1,5 +1,5 @@
 # Windows launcher: create missing project, otherwise open the existing .xpr.
-# Used by START_WINDOWS.cmd with: -mode gui -source ... -tclargs PROGRAM ISA_LAB2
+# Used by OTWORZ_VIVADO.cmd with: -mode gui -source ... -tclargs PROGRAM ISA_LAB2
 set package_root [file normalize [file join [file dirname [info script]] ..]]
 if {![info exists argc] || $argc != 2} { error "Expected PROGRAM ISA_LAB2" }
 set PROGRAM [lindex $argv 0]

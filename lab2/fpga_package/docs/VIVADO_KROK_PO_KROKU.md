@@ -1,6 +1,6 @@
 # Lab 2: instrukcja stanowiskowa Vivado i zbierania wyników
 
-**Windows 11, najkrótsza ścieżka:** [START TUTAJ](../START_TUTAJ_WINDOWS.md). Dwuklik `START_WINDOWS.cmd`, opcja1, tworzy i otwiera projekt bez ręcznego wpisywania Tcl. Ten dokument jest wersją szczegółową, z odtworzeniem poszczególnych etapów z materiałów zajęć.
+**Windows 11, najkrótsza ścieżka:** [główny przewodnik Windows](../README.md). Dwuklik `OTWORZ_VIVADO.cmd`, opcja1, tworzy i otwiera projekt bez ręcznego wpisywania Tcl. Ten dokument jest wersją szczegółową, z odtworzeniem poszczególnych etapów z materiałów zajęć.
 
 Instrukcja do **Vivado 2024.1** i **oryginalnej Digilent ZYBO z XC7Z010-1CLG400C**. W Vivado nazwa części to `xc7z010clg400-1`. Oznaczenie `xc7z010_1` w Hardware Manager oznacza wykryte urządzenie. Materiały zajęć wskazują ZYBO na s. 2, wybór płytki na s. 9 i urządzenie na s. 20; dostarczony XDC ma nagłówek „ZYBO Rev B”. Oficjalny [manual ZYBO](https://digilent.com/reference/_media/zybo/zybo_rm.pdf), s. 2, potwierdza część. **ZYBO Z7-10/Z7-20 wymaga innego doboru płytki i pinów.** Sprawdź napis na rzeczywistej płytce przed rozpoczęciem.
 
@@ -14,7 +14,7 @@ W paczce poprawiono także sterowanie względem oryginalnego projektu: CPU/UART 
 2. Uruchom **Vivado 2024.1** na komputerze laboratoryjnym. Upewnij się, że instalacja zawiera rodzinę **Zynq-7000**. Materiały dopuszczają darmową edycję Vivado ML Standard, s. 2.
 3. Przygotuj PuTTY lub Tera Term, dwa przewody USB z transmisją danych oraz Pmod USBUART podłączony do JE.
 4. Utwórz katalog wyników, np. `C:/lab2/wyniki`, oraz plik notatek z nazwiskami, datą, numerem stanowiska, modelem płytki, wersją Vivado i wybranym wariantem ISA.
-5. Przeczytaj różnicę między trybem Python i lab2 w README paczki. W Pythonie kod `3x` oznacza mnożenie, a zadanie ze s. 25 materiałów wymaga użycia bitu 4 kodu dodawania do wyboru rejestru. Jedno kodowanie `30` nie może jednocześnie znaczyć obu tych rzeczy. Przed każdą demonstracją zanotuj wariant ISA i nazwę COE.
+5. Przeczytaj różnicę między trybem Python i lab2 w [opisie programów](PROGRAMY_I_SKRYPTY.md). W Pythonie kod `3x` oznacza mnożenie, a zadanie ze s. 25 materiałów wymaga użycia bitu 4 kodu dodawania do wyboru rejestru. Jedno kodowanie `30` nie może jednocześnie znaczyć obu tych rzeczy. Przed każdą demonstracją zanotuj wariant ISA i nazwę COE.
 
 **Do sprawozdania:** zapisz wersję Vivado i zdjęcie oznaczenia płytki; nie wpisuj modelu wyłącznie na podstawie nazwy projektu.
 
@@ -118,7 +118,7 @@ RAM ma 16 bajtowych lokacji wspólnych dla kodu i danych. Dane CPU mają 4 bity,
 3. W **Flow Navigator -> Simulation -> Run Simulation -> Run Behavioral Simulation** uruchom symulację. W konsoli sprawdź podsumowanie PASS/FAIL testbench. Sama obecność przebiegów nie oznacza zaliczenia testu.
 4. W **Scopes** wybierz CPU, a w **Objects** dodaj do wykresu przez **Add to Wave Window**: zegar, `clk_enable`, reset, `dbg_state`, `dbg_pc`, `dbg_r0`, `dbg_r1`, adres i dane pamięci oraz `mem_we`. Przy symulacji integracji dodaj `step_tick` z `toplevel`. Dla danych ustaw prawym przyciskiem **Radix -> Hexadecimal**.
 5. Jeżeli skrypt zdążył już zakończyć symulację, po dodaniu sygnałów kliknij **Restart**, aby rozpocząć od czasu 0 i zarejestrować ich przebiegi. Użyj **Run All**, a następnie **Zoom Fit**. Znajdź jedną pełną instrukcję: cztery aktywne impulsy `clk_enable` i stany 0 -> 1 -> 2 -> 3 -> 0. Zaznacz moment zmiany wyniku. W trybie CE pomiędzy krokami nadal występują zbocza zegara głównego, ale CPU wtedy nie przechodzi do kolejnego stanu. Testbench samego CPU może używać zezwolenia stale aktywnego i wtedy każdy takt przesuwa stan.
-6. Zanotuj nazwę testu, wariant ISA i wynik. Testy zgodności Python/Verilog odpal według README; nie utożsamiaj czterech taktów Veriloga z jedną iteracją instrukcji bez uwzględnienia stanów.
+6. Zanotuj nazwę testu, wariant ISA i wynik. Testy zgodności Python/Verilog odpal według [opisu testów](PROGRAMY_I_SKRYPTY.md#weryfikacja); nie utożsamiaj czterech taktów Veriloga z jedną iteracją instrukcji bez uwzględnienia stanów.
 
 **Screen S05:** przebiegi pełnej instrukcji z widocznymi nazwami sygnałów i wartościami. **Screen S06:** podsumowanie testów. Podstawowy sposób uruchomienia i obsługi symulatora opisuje [AMD UG900 dla Vivado 2024.1](https://docs.amd.com/r/2024.1-English/ug900-vivado-logic-simulation).
 
@@ -241,7 +241,7 @@ Program ma wyzerować R0, R1 i `M[14]`, wczytać 6 do R0, dodać wartość z `M[
 2. W programie **`mul`** kolejne instrukcje to `CC DD 30 EF FE 00`. Sprawdź początkowo `M[C]=06` i `M[D]=07`. Po dwóch LDR oczekuj R0=6, R1=7. Po `30` iloczyn 42 dziesiętnie, czyli `2A`, daje **R1=2, R0=A**. Po `EF` dolny półbajt trafia do **M[F]=0A**, a po `FE` górny do **M[E]=02**. Komentarze przy STR w `lab1/scs.py` zamieniają adresy 14/15; rzeczywisty adres wynika z dolnego półbajtu kodu, więc w tym teście poprawna kolejność wyniku w pamięci jest E:02, F:0A.
 3. W programie **`sub`** początek to `CC DD 40 EE 00`. Sprawdź `M[C]=07`, `M[D]=06`. Po LDR/LDR i `40` oczekuj **R0=1, R1=6**, a po STR **M[E]=01**. Komentarz sugerujący inny wynik w Pythonie jest nieaktualny; liczą się bajty i wykonanie.
 4. Dodatkowo uruchom **`sub_underflow`**: `83 95 40 EE 04` ustawia R0=3, R1=5, wykonuje SUB, zapisuje wynik do M[E] i zatrzymuje się w pętli JMP4. Wynik -2 daje **R0=E, R1=5, M[E]=0E** modulo 16. Program **`overflow`**, `8F 91 20 EE 04`, pokazuje F+1 -> **R0=0, R1=1, M[E]=00**. To dodatkowe przypadki względem oryginalnych `mul`/`sub` z lab1; oba mogą działać w wariancie Python i lab2.
-5. Porównaj stany z wynikiem symulatora Python dla identycznych bajtów. Porównuj stabilny stan po pełnych instrukcjach i rzeczywiste zmiany RAM. CPU na płytce ma 4-bitowy PC; szczególne przypadki związane z końcem pamięci interpretuj zgodnie z ograniczeniami opisanymi w README.
+5. Porównaj stany z wynikiem symulatora Python dla identycznych bajtów. Porównuj stabilny stan po pełnych instrukcjach i rzeczywiste zmiany RAM. CPU na płytce ma 4-bitowy PC; szczególne przypadki związane z końcem pamięci interpretuj zgodnie z ograniczeniami opisanymi w [architekturze](ARCHITEKTURA.md).
 
 W katalogu `programs` każdemu programowi towarzyszą `NAZWA.instructions.csv` ze stanem po pełnych instrukcjach i `NAZWA.trace.json` z kolejnymi mikrocyklami. Użyj ich jako wzorca przy sporządzaniu tabeli; kolumna `cycle` podaje liczbę kroków CPU, nie liczbę wszystkich zboczy 125 MHz.
 

@@ -23,7 +23,7 @@ start "" "%SCS_PUTTY%" -serial %SCS_COM% -sercfg 115200,8,n,1,N
 exit /b 0
 :missing_putty
 echo PuTTY was not found. Install it or place putty.exe next to this file.
-echo Alternatively open PuTTY manually and follow START_TUTAJ_WINDOWS.md.
+echo Alternatively open PuTTY manually and follow README.md.
 pause
 exit /b 1
 :bad_port

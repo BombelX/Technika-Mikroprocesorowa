@@ -67,7 +67,7 @@ echo.
 echo Using: "%SCS_VIVADO%"
 echo Program: %SCS_PROGRAM%, ISA_LAB2=%SCS_ISA%
 echo Wait for Vivado to finish creating/opening the project.
-echo Then follow START_TUTAJ_WINDOWS.md. Keep this console open.
+echo Then follow README.md. Keep this console open.
 call "%SCS_VIVADO%" -mode gui -source "%~dp0scripts\windows_project.tcl" -tclargs %SCS_PROGRAM% %SCS_ISA%
 if errorlevel 1 goto :vivado_failed
 exit /b 0

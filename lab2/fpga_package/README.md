@@ -2,7 +2,9 @@
 
 Komplet źródeł do **oryginalnej Digilent ZYBO / XC7Z010-1CLG400C**, zegar 125 MHz, **Vivado 2024.1**. Skrypty tworzą projekt `.xpr`, pamięć Block Memory Generator i wrapper, a następnie mogą wygenerować `.bit`. Paczka działa samodzielnie po skopiowaniu całego katalogu; nie wymaga board files ani Pythona na komputerze z Vivado. **Nie zawiera gotowego bitstreamu.**
 
-Zacznij od [dokładnego przewodnika laboratoryjnego](docs/VIVADO_KROK_PO_KROKU.md): podłączenie, każde okno i kliknięcie Vivado, programowanie, UART, testy oraz screeny S01-S22. [Szablon sprawozdania](docs/SPRAWOZDANIE_SZABLON.md) zawiera miejsca na rzeczywiste pomiary. [Architektura](docs/ARCHITEKTURA.md) wyjaśnia kodowanie instrukcji i różnice względem materiałów.
+**Windows 11: zacznij od [prostej instrukcji START TUTAJ](START_TUTAJ_WINDOWS.md)** lub otwórz dwuklikiem [jej wersję HTML](START_TUTAJ_WINDOWS.html) w przeglądarce. Rozpakuj całą paczkę, dwukrotnie kliknij **`START_WINDOWS.cmd`** i naciśnij **1**. Vivado utworzy projekt wraz z pamięcią i otworzy go; przy kolejnych uruchomieniach otworzy istniejący `.xpr`. Pierwszy program to `load_store`, profil lab2. Ustawienie do najprostszego odczytu w PuTTY to **SW3..SW0=`0100`**, reset BTN0, następnie BTN2: jedna instrukcja i cztery wiersze. PuTTY uruchom ręcznie lub przez `PUTTY_WINDOWS.cmd`, wskazując COM Pmod.
+
+[Dokładny przewodnik laboratoryjny](docs/VIVADO_KROK_PO_KROKU.md) zawiera także ręczne tworzenie projektu i screeny S01-S22. [Szablon sprawozdania](docs/SPRAWOZDANIE_SZABLON.md) zawiera miejsca na rzeczywiste pomiary. [Architektura](docs/ARCHITEKTURA.md) wyjaśnia kodowanie instrukcji i różnice względem materiałów. Poniższe polecenia Tcl są alternatywą dla startu dwuklikiem.
 
 ## Najszybsze uruchomienie na stanowisku
 

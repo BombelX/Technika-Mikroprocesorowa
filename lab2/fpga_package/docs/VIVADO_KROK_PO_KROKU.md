@@ -1,5 +1,7 @@
 # Lab 2: instrukcja stanowiskowa Vivado i zbierania wyników
 
+**Windows 11, najkrótsza ścieżka:** [START TUTAJ](../START_TUTAJ_WINDOWS.md). Dwuklik `START_WINDOWS.cmd`, opcja1, tworzy i otwiera projekt bez ręcznego wpisywania Tcl. Ten dokument jest wersją szczegółową, z odtworzeniem poszczególnych etapów z materiałów zajęć.
+
 Instrukcja do **Vivado 2024.1** i **oryginalnej Digilent ZYBO z XC7Z010-1CLG400C**. W Vivado nazwa części to `xc7z010clg400-1`. Oznaczenie `xc7z010_1` w Hardware Manager oznacza wykryte urządzenie. Materiały zajęć wskazują ZYBO na s. 2, wybór płytki na s. 9 i urządzenie na s. 20; dostarczony XDC ma nagłówek „ZYBO Rev B”. Oficjalny [manual ZYBO](https://digilent.com/reference/_media/zybo/zybo_rm.pdf), s. 2, potwierdza część. **ZYBO Z7-10/Z7-20 wymaga innego doboru płytki i pinów.** Sprawdź napis na rzeczywistej płytce przed rozpoczęciem.
 
 Ta paczka zawiera opis sprzętu CPU w Verilogu i programy procesora w plikach COE. Są to dwa różne poziomy: Verilog określa dostępne instrukcje, a COE określa wykonywany program. Do FPGA wgrywamy wynikowy plik `.bit`, w którym są zarówno sprzęt, jak i początkowa zawartość RAM. Vivado nie uruchamia pliku Python na płytce.

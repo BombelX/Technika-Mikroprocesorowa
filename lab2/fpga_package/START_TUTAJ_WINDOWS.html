@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZYBO: Windows 11, Vivado i PuTTY — start</title>
+<style>
+body{font:18px/1.65 system-ui,sans-serif;color:#172536;background:#f3f6f8;margin:0}
+main{max-width:900px;margin:auto;padding:40px 24px 80px}h1{line-height:1.2}h2{font-size:1.3em;margin-top:2em}
+article{padding:8px 26px 24px;background:white;border:1px solid #d5e0e6;border-radius:12px;margin:20px 0}
+code{background:#eaf0f4;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}
+.key{background:#dff2e7;border-left:5px solid #247148;padding:18px 22px}.note{background:#fff1d6;padding:16px 22px}
+table{border-collapse:collapse;width:100%;margin:15px 0}th,td{padding:10px;border:1px solid #d5e0e6;text-align:left}
+th{background:#eaf0f4}a{color:#145a9b}small{font-size:.85em}li{margin:8px 0}
+@media print{body{background:white;font-size:12pt}main{padding:0}article{break-inside:avoid}}
+</style>
+<main>
+<h1>ZYBO → Vivado → PuTTY</h1>
+<p>Windows 11 · Vivado 2024.1 · oryginalna ZYBO / XC7Z010</p>
+<p class="key"><strong>Na start: START_WINDOWS.cmd → klawisz 1.<br>
+Na płytce: SW3–SW0 = 0100 → BTN0 → BTN2.</strong></p>
+<p class="note">Paczka zawiera źródła i automatyczne tworzenie projektu. Nie zawiera sprawdzonego
+bitstreamu. Pierwszą budowę musi wykonać Wasze Vivado; testy Windows i płytki pozostają do potwierdzenia.</p>
+
+<article><h2>1. Rozpakuj</h2>
+<p>ZIP → prawy przycisk → <strong>Wyodrębnij wszystkie</strong>.
+Cały katalog umieść w <code>C:\lab2\fpga_package</code>. Nie uruchamiaj z podglądu ZIP.</p>
+<p>Potrzebne: pełne Vivado 2024.1 z rodziną Zynq-7000 oraz PuTTY. Samo Vivado Lab Edition nie zbuduje projektu.</p></article>
+
+<article><h2>2. Podłącz dwa USB i włącz płytkę</h2>
+<ol><li>Sprawdź, że to <strong>oryginalna ZYBO</strong>, a nie ZYBO Z7.</li>
+<li>Przy wyłączonej płytce sprawdź Pmod USBUART w <strong>JE</strong>. Jeśli nie jest osadzony, skorzystaj z instrukcji stanowiska i oznaczeń GND/VCC; nie zgaduj orientacji.</li>
+<li><strong>Kabel 1:</strong> złącze ZYBO <strong>PROG/UART</strong> → komputer. To programowanie.</li>
+<li><strong>Kabel 2:</strong> USB małego <strong>Pmod na JE</strong> → komputer. To dane do PuTTY.</li>
+<li>Źródło zasilania JP7 zgodne z użytym zasilaniem; przy USB wybierz USB. Włącz <strong>SW4</strong>, sprawdź <strong>PGOOD</strong>.</li></ol>
+<p><small>Zdjęcie do sprawozdania: płytka i oba kable.</small></p></article>
+
+<article><h2>3. Otwórz projekt</h2>
+<ol><li>Zamknij poprzednie Vivado po zapisaniu pracy.</li>
+<li>Dwuklik <strong>START_WINDOWS.cmd</strong>, potem naciśnij <strong>1</strong>.</li>
+<li>Jeśli pyta o ścieżkę Vivado, wpisz lokalizację <code>bin\vivado.bat</code> z właściwości skrótu Vivado.</li>
+<li>Poczekaj na <strong>WINDOWS PROJECT READY</strong> w Tcl Console. Projekt i pamięć tworzą się automatycznie.</li>
+<li>W Project Summary sprawdź <code>xc7z010clg400-1</code>. W Sources top to <code>toplevel</code>; pamięć nie może mieć znaku zapytania.</li></ol>
+<p>Przy kolejnych uruchomieniach otworzy ten sam projekt. Można też otworzyć
+<code>build\load_store_lab2\scs.xpr</code> przez File → Project → Open. Zachowaj cały folder paczki.</p></article>
+
+<article><h2>4. Zbuduj i wgraj</h2>
+<ol><li><strong>Generate Bitstream</strong> → Save / Yes / OK, jeśli pyta.</li>
+<li>Poczekaj na <strong>Bitstream Generation Completed</strong>.</li>
+<li><strong>Open Implemented Design</strong> → Reports → Timing → Report Timing Summary. Sprawdź spełnienie setup/hold i istotne nieograniczone ścieżki; błędy pokaż prowadzącemu przed wgraniem.</li>
+<li><strong>Open Hardware Manager → Open Target → Auto Connect</strong>.</li>
+<li><strong>Program Device → xc7z010_1</strong>.</li>
+<li>Bitstream file: <code>build\load_store_lab2\scs.runs\impl_1\toplevel.bit</code> → <strong>Program</strong>.</li></ol>
+<p>Powinna świecić DONE. Screeny: timing, hierarchia i Hardware Manager.</p></article>
+
+<article><h2>5. Znajdź COM Pmod i otwórz PuTTY</h2>
+<ol><li>Start Windows → prawy przycisk → <strong>Menedżer urządzeń → Porty (COM i LPT)</strong>.</li>
+<li>Odłącz <strong>tylko kabel 2</strong>: port, który zniknął, to Pmod. Podłącz go ponownie i odczytaj COM.</li>
+<li>PuTTY → <strong>Serial</strong>, Serial line: Wasz <strong>COM</strong>, Speed: <strong>115200</strong>.</li>
+<li>Connection → Serial: <strong>8 / 1 / Parity None / Flow control None</strong>.</li>
+<li>Session → Logging → <strong>All session output</strong>, wybierz plik. Wróć do Session → <strong>Open</strong>.</li></ol>
+<p>Na kolejne uruchomienia można użyć <strong>PUTTY_WINDOWS.cmd</strong>: wpisz COM, skrypt ustawi transmisję.
+Logowanie włącz ręcznie. Nie wpisuj loginu ani komend do terminala; to wyjście debuggera.</p></article>
+
+<article><h2>6. Ustaw dokładnie 0100 i naciśnij przyciski</h2>
+<p>Sprawdź nadruki numerów przełączników. Kolejność zapisu to <strong>SW3, SW2, SW1, SW0</strong>.</p>
+<table><tr><th>SW3</th><th>SW2</th><th>SW1</th><th>SW0</th></tr>
+<tr><td>0 / dół</td><td><strong>1 / góra</strong></td><td>0 / dół</td><td>0 / dół</td></tr></table>
+<ol><li><strong>BTN0</strong> naciśnij i zwolnij — reset. Poczekaj sekundę.</li>
+<li><strong>BTN2</strong> naciśnij na około 0,1 s i zwolnij. Poczekaj sekundę.</li>
+<li>PuTTY: cztery wiersze <code>c=1, c=2, c=3, c=0</code>. To jedna instrukcja.</li>
+<li>Powtarzaj BTN2. Do tabeli sprawozdania bierz ostatni wiersz <code>c=0</code>.</li></ol>
+<table><tr><th>Naciśnięcie BTN2 od resetu</th><th>Oczekiwany wynik</th></tr>
+<tr><td>4</td><td>R0=6, R1=0</td></tr><tr><td>5</td><td>R0=6, R1=5</td></tr>
+<tr><td><strong>6</strong></td><td><strong>R0=B, R1=5 — wynik 6+5=11</strong></td></tr>
+<tr><td><strong>7</strong></td><td><strong>Przedostatni bajt M: to 0B; końcówka: … 05 0B 00</strong></td></tr>
+<tr><td>8</td><td>PC=0 — początek następnej pętli</td></tr></table>
+<p>Screeny po naciśnięciach 6 i 7. Puste PuTTY przed BTN2 jest normalne.</p></article>
+
+<article><h2>7. Pozostałe ustawienia i testy</h2>
+<table><tr><th>SW3–SW0</th><th>Działanie</th></tr>
+<tr><td><strong>0100</strong></td><td>BTN2: instrukcja i 4 wiersze. Ustawienie startowe.</td></tr>
+<tr><td><strong>0101</strong></td><td>BTN2: jeden takt i 1 wiersz. Cztery naciśnięcia na instrukcję.</td></tr>
+<tr><td>0000</td><td>BTN2: instrukcja; po sekundzie BTN1: jeden zrzut.</td></tr>
+<tr><td>0110</td><td>Sam wykonuje i wypisuje jeden takt/s.</td></tr>
+<tr><td>1010</td><td>Sam wykonuje takty, ale bez automatycznych zrzutów.</td></tr></table>
+<p>Zmiana trybu → BTN0 przed ponownym liczeniem kroków. Reset nie przywraca RAM.
+Po wyłączeniu zasilania ponów Program Device.</p>
+<p>Do dalszych testów: zamknij Vivado, uruchom START_WINDOWS.cmd i wybierz:
+<strong>2: MUL zgodne z Pythonem, 3: SUB, 4: ADD do R1, 5: MUL lab2, 6: program bazowy</strong>.
+Każdy nowy projekt wymaga budowy i wgrania. Opcje 1 i 4 pokazują wybór rejestru ADD.</p></article>
+
+<p>Więcej szczegółów i diagnostyka: <strong>START_TUTAJ_WINDOWS.md</strong> oraz
+<strong>docs/VIVADO_KROK_PO_KROKU.md</strong>. Szablon sprawozdania: <strong>docs/SPRAWOZDANIE_SZABLON.md</strong>.</p>
+</main>
+</html>

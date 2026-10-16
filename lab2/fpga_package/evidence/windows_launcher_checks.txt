@@ -1,0 +1,8 @@
+PASS load_store 1 create and reopen, path with spaces
+PASS mul 0 create and reopen, path with spaces
+PASS sub 0 create and reopen, path with spaces
+PASS lab2_add_r1 1 create and reopen, path with spaces
+PASS lab2_mul 1 create and reopen, path with spaces
+PASS base 0 create and reopen, path with spaces
+PASS unsupported/missing arguments rejected
+NOTE: Vivado commands mocked; Windows CMD, Vivado GUI, IP and hardware NOT executed.

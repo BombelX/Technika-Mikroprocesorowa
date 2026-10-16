@@ -30,3 +30,7 @@ Testy używają tymczasowych katalogów i nie modyfikują źródeł. W Vivado `s
 - Wgranie na właściwą płytkę i PMOD, faktyczny UART 115200/8N1, ręczne/automatyczne kroki i logi obliczeń dla obu profili.
 
 Skrypty BMG przejrzano według [AMD PG058 v8.4](https://docs.amd.com/api/khub/documents/V70n09duEdKgzrX2d1W97g/content), a kolejność syntezy/implementacji według [UG835 Vivado 2024.1](https://docs.amd.com/r/2024.1-English/ug835-vivado-tcl-commands/launch_runs). Szczegółowa procedura sprzętowa i dowody do zebrania: [przewodnik](../docs/VIVADO_KROK_PO_KROKU.md).
+
+## Uzupełnienie: Windows 11
+
+Dodano `START_WINDOWS.cmd` (wybór programu, wykrywanie Vivado, tworzenie lub otwieranie projektu), `PUTTY_WINDOWS.cmd` (lista COM, wybór portu i parametry115200/8N1/None) oraz uproszczony przewodnik. Nie zmieniono RTL ani programów. Nowy `windows_project.tcl` sprawdzono w atrapie poleceń Vivado: tworzenie, ponowne otwarcie, ścieżki ze spacjami, odrzucanie niewłaściwych argumentów. Wszystkie sześć konfiguracji menu przechodzi tę kontrolę; atrapa nie generuje prawdziwego `.xpr`. Skrypty `.cmd` zapisano jako ASCII z końcami linii CRLF. **Nie wykonano ich w Windows/cmd.exe ani nie uruchomiono PuTTY/Vivado**. Doświadczenie funkcjonalne CPU z poprzednich testów pozostaje aktualne, ale nie potwierdza działania tych programów Windows.

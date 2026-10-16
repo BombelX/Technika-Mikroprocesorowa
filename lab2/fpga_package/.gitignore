@@ -1,0 +1,8 @@
+build/
+.Xil/
+*.jou
+*.log
+*.str
+*.vcd
+*.vvp
+__pycache__/
